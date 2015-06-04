@@ -14,25 +14,35 @@ func check(e error) {
     }
 }
 
-func main() {
-	filename := os.Args[1]
+func readFileString(filename string) (dat string) {
 	byte_dat, err := ioutil.ReadFile(filename)
 	check(err)
+	dat = string(byte_dat)
+	return
+}
 
-	dat := string(byte_dat)
-	dat = strings.TrimSpace(dat)
-	
-	counts := make(map[rune]int)
-	
+func countChars(dat string) (counts map[rune]int) {
+	counts = make(map[rune]int)
 	for _, char := range dat {
 		counts[char] = counts[char] + 1
 	}
+	return
+}
 
-	var keys sortutil.RuneSlice = make([]rune, 0, len(counts))
+func sortKeys(counts map[rune]int) (keys []rune) {
+	keys = make([]rune, 0, len(counts))
 	for key := range counts {
 		keys = append(keys, key)
 	}
-	sort.Sort(keys)
+	sort.Sort(sortutil.RuneSlice(keys))
+	return
+}
+
+func main() {
+	filename := os.Args[1]
+	dat := strings.TrimSpace(readFileString(filename))
+	counts := countChars(dat)
+	keys := sortKeys(counts)
 	
 	for _, key := range keys {
 		fmt.Print(counts[key], " ")
