@@ -1,25 +1,12 @@
 package main
 
 import "fmt"
-import "io/ioutil"
 import "os"
 import "sort"
 import "strings"
 
+import "github.com/abingham/rosalind-go/util"
 import "github.com/cznic/sortutil"
-
-func check(e error) {
-    if e != nil {
-        panic(e)
-    }
-}
-
-func readFileString(filename string) (dat string) {
-	byte_dat, err := ioutil.ReadFile(filename)
-	check(err)
-	dat = string(byte_dat)
-	return
-}
 
 func countChars(dat string) (counts map[rune]int) {
 	counts = make(map[rune]int)
@@ -40,7 +27,7 @@ func sortKeys(counts map[rune]int) (keys []rune) {
 
 func main() {
 	filename := os.Args[1]
-	dat := strings.TrimSpace(readFileString(filename))
+	dat := strings.TrimSpace(util.ReadFileString(filename))
 	counts := countChars(dat)
 	keys := sortKeys(counts)
 	
