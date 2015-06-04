@@ -1,4 +1,4 @@
-package complement
+package rosalind
 
 import "testing"
 

@@ -1,5 +1,5 @@
 // Various common functions for the rosalind-go project
-package util
+package rosalind
 
 import (
 	"io/ioutil"

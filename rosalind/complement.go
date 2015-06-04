@@ -1,4 +1,4 @@
-package complement
+package rosalind
 
 // Get the complement of a single DNA base
 func baseComp(base byte) (comp byte) {
